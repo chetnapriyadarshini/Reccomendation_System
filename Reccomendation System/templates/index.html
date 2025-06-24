@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter username for recomendations</title>
+</head>
+<body>
+    <form id="myForm">
+        <p>Please enter a valid username to get top product recommendations.</p>
+        <input type="text" id="username" name="username" placeholder="Enter username" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username })
+            });
+            const data = await response.text();
+            document.getElementById('result').innerHTML = data;
+        });
+    </script>
+</body>
+</html>
